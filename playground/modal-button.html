@@ -10,16 +10,16 @@
   <div id="app">
     <template>
      <button @click="studyModal = true">모달열기</button>
-     <modal-layer :show="studyModal" @close="studyModal = false"/>
+     <modal-layer :show-modal="studyModal" @close="studyModal = false"/>
     </template>
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
     var ModalLayer = {
-      template: '<div v-if="show" class="modal-mask" @click="closeModal"><div class="box_modal" @click.stop><button @click="closeModal">닫기</button></div></div>',
+      template: '<div v-if="showModal" class="modal-mask" @click="closeModal"><div class="box_modal" @click.stop><button @click="closeModal">닫기</button></div></div>',
       props: {
-        show: {
+        showModal: { //props 의 name 값은 상세하게 기재, show -> showModal
           default: false,
           type: Boolean,
         }
