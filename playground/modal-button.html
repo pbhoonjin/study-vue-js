@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <template>
+     <button @click="studyModal = true">모달열기</button>
+     <modal-layer :show="studyModal" @close="studyModal = false"/>
+    </template>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var ModalLayer = {
+      template: '<div v-if="show" class="modal-mask" @click="closeModal"><div class="box_modal" @click.stop><button @click="closeModal">닫기</button></div></div>',
+      props: {
+        show: {
+          default: false,
+          type: Boolean,
+        }
+      },
+      methods: {
+        closeModal() {
+          this.$emit('close');
+        }
+      },
+      
+    }
+    new Vue({
+      el: '#app',
+      name: 'ModalButton',
+      components: {
+        'modal-layer': ModalLayer,
+      },
+      data() {
+        return {
+          studyModal: false,
+        }
+      },
+    })
+  </script>
+  <style>
+    .modal-mask{position:fixed;left:0;top:0;z-index:10;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.5)}
+    .box_modal{position:fixed;left:50%;top:50%;width:290px;height:50vh;background-color:#fff;transform:translate(-50%,-50%)}
+  </style>
+</body>
+</html>
